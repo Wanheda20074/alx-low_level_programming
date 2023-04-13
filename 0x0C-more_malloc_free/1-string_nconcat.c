@@ -1,37 +1,47 @@
 #include "main.h"
-#include <stdlib.h>
 
 /**
- * _strdup - Returns a pointer to a new string
- * which is a duplicate of the string str
- * @str: Pointer to string duplicated
+ * string_nconcat - a function that concatenates two strings.
  *
- * Return: Pointer to duplicated string, NULL
- * if str is NULL or memory is insufficient
-*/
-
-char *_strdup(char *str)
+ * @s1: first char
+ * @s2: secound char
+ * @n: unsigned int
+ *
+ * Return: If the function fails, it should return NULL
+ */
+char *string_nconcat(char *s1, char *s2, unsigned int n)
 {
-	char *new_str;
-	unsigned int i, str_len;
+	unsigned int x, y, z;
+	char *s;
 
-	if (str == NULL)
+	if (s1 == NULL)
+	{
+		x = 0;
+	}
+	else
+	{
+		for (x = 0; s1[x]; ++x)
+		;
+	}
+	if (s2 == NULL)
+	{
+		y = 0;
+	}
+	else
+	{
+		for (y = 0; s2[y]; ++y)
+		;
+	}
+	if (y > n)
+		y = n;
+	s = malloc(sizeof(char) * (x + y + 1));
+	if (s == NULL)
 		return (NULL);
-
-	str_len = 0;
-
-	while (str[str_len] != '\0')
-		str_len++;
-
-	new_str = malloc(sizeof(char) * (str_len + 1));
-
-	if (new_str == NULL)
-		return (NULL);
-
-	for (i = 0; i < str_len; i++)
-		new_str[i] = str[i];
-
-	new_str[str_len] = '\0';
-
-	return (new_str);
+	for (z = 0; z < x; z++)
+		s[z] = s1[z];
+	for (z = 0; z < y; z++)
+		s[z + x] = s2[z];
+	s[x + y] = '\0';
+	return (s);
 }
+
